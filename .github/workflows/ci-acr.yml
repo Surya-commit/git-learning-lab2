@@ -53,3 +53,10 @@ jobs:
           docker build -t $IMAGE:$SHA -t $IMAGE:latest .
           docker push $IMAGE:$SHA
           docker push $IMAGE:latest
+
+      - name: Docker login to ACR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.AZURE_CLIENT_ID }}
+          password: ${{ secrets.AZURE_CLIENT_SECRET }}    
